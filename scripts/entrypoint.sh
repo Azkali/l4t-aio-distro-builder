@@ -26,7 +26,7 @@ docker run -it --rm -e CPUS="${CPUS}" -v "${volume}":/out alizkan/l4t-kernel:lat
 # Copying kernel, kernel modules and device tree file to switchroot directrory
 mv "${out}/Image" "${out}/tegra210-icosa.dtb" "${out}/modules.tar.gz" "${out}/update.tar.gz" "${out}/switchroot/${DISTRO}"
 
-# Rebuild uboot
+echo -e "\nBuilding Uboot\n"
 docker run -it --rm -e DISTRO=${DISTRO} -v ${volume}:/out alizkan/u-boot:linux-norebase
 
 echo -e "\nBuilding boot.scr and initramfs and updating coreboot.rom\n"
@@ -42,5 +42,5 @@ echo -e "\nUpdating and renaming 7z archive created during JetFactory build\n"
 mv "${out}/switchroot-${DISTRO}.7z" "${out}/switchroot-${DISTRO}-$(date +%F).7z"
 
 # Cleaning build files
-rm -r "${out}/bootloader/" "${out}/switchroot/"
+rm -r "${out}/bootloader/" "${out}/switchroot/" "${out}/u-boot.elf"
 echo -e "Done, file produced: ${out}/switchroot-${DISTRO}-$(date +%F).7z"
