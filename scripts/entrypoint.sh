@@ -27,7 +27,7 @@ docker run -it --rm -e CPUS="${CPUS}" -v "${volume}":/out alizkan/l4t-kernel:lat
 mv "${out}/Image" "${out}/tegra210-icosa.dtb" "${out}/modules.tar.gz" "${out}/update.tar.gz" "${out}/switchroot/${DISTRO}"
 
 echo -e "\nBuilding Uboot\n"
-docker run -it --rm -e DISTRO=${DISTRO} -v ${volume}:/out alizkan/u-boot:linux-norebase
+docker run -it --rm -e DISTRO=${DISTRO} -v ${volume}:/out alizkan/switch-uboot:linux-norebase
 
 echo -e "\nBuilding boot.scr and initramfs and updating coreboot.rom\n"
 docker run -it --rm -e DISTRO="${DISTRO}" -e PARTNUM="${PARTNUM}" -e HEKATE_ID="${HEKATE_ID}" -v "${volume}":/out alizkan/l4t-bootfiles-misc:latest
