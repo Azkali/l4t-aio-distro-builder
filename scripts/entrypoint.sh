@@ -23,17 +23,14 @@ mkdir -p "${out}/bootloader/ini/" "${out}/switchroot/${DISTRO}"
 echo -e "\nBuilding L4T-Kernel\n"
 docker run -it --rm -e CPUS="${CPUS}" -v "${volume}":/out alizkan/l4t-kernel:latest
 
-echo -e "\nBuilding u-boot\n"
-docker run -it --rm -e DISTRO="${DISTRO}" -v "${volume}":/out alizkan/switch-uboot:linux-norebase
+# Copying kernel, kernel modules and device tree file to switchroot directrory
+mv "${out}/Image" "${out}/tegra210-icosa.dtb" "${out}/modules.tar.gz" "${out}/update.tar.gz" "${out}/switchroot/${DISTRO}"
 
 echo -e "\nBuilding boot.scr and initramfs and updating coreboot.rom\n"
 docker run -it --rm -e DISTRO="${DISTRO}" -e PARTNUM="${PARTNUM}" -e HEKATE_ID="${HEKATE_ID}" -v "${volume}":/out alizkan/l4t-bootfiles-misc:latest
 
 echo -e "\nBuilding the actual distribution\n"
 docker run -it --rm --privileged -e DISTRO="${DISTRO}" -e DEVICE="${DEVICE}" -e HEKATE=true -e HEKATE_ID="${HEKATE_ID}" -v "${volume}":/out alizkan/jet-factory:latest
-
-# Copying kernel, kernel modules and device tree file to switchroot directrory
-mv "${out}/Image" "${out}/tegra210-icosa.dtb" "${out}/modules.tar.gz" "${out}/update.tar.gz" "${out}/switchroot/${DISTRO}"
 
 echo -e "\nUpdating and renaming 7z archive created during JetFactory build\n"
 "${zip_ver}" u "${out}/switchroot-${DISTRO}.7z" "${out}/bootloader" "${out}/switchroot"
