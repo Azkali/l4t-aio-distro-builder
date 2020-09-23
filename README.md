@@ -23,7 +23,7 @@ docker volume create --name "${swr_vol}" --opt type=none --opt device=/absolute/
 Run the container:
 
 ```sh
-docker run --privileged -it --rm -e DISTRO=arch -e DEVICE=tegra210 -e PARTNUM=2 -e HEKATE_ID=SWR-ARC -e CPUS=4 -v "${swr_vol}":/out -v /var/run/docker.sock:/var/run/docker.sock alizkan/l4t-multi:latest
+docker run --privileged -it --rm -e DISTRO=arch -e DEVICE=tegra210 -e PARTNUM=2 -e HEKATE_ID=SWR-ARC -e CPUS=4 -v "${swr_vol}":/out -v /var/run/docker.sock:/var/run/docker.sock alizkan/l4t-aio-distro-builder:latest
 ```
 
 Remove the volume when done:
