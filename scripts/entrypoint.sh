@@ -42,5 +42,5 @@ echo -e "\nUpdating and renaming 7z archive created during JetFactory build\n"
 mv "${out}/switchroot-${DISTRO}.7z" "${out}/switchroot-${DISTRO}-$(date +%F).7z"
 
 # Cleaning build files
-rm -r "${out}/bootloader/" "${out}/switchroot/" "${out}/u-boot.elf"
+rm -r "${out}/bootloader/" "${out}/switchroot/"
 echo -e "Done, file produced: ${out}/switchroot-${DISTRO}-$(date +%F).7z"
