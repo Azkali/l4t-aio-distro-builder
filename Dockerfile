@@ -1,5 +1,8 @@
 FROM ubuntu:18.04
 ARG DEBIAN_FRONTEND=noninteractive
+
+RUN chmod 1777 /tmp
+
 RUN apt-get update -y && apt-get install -y p7zip-full docker.io
 
 VOLUME /out
