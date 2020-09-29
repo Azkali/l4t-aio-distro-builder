@@ -7,8 +7,10 @@ RUN apt-get update -y && apt-get install -y p7zip-full docker.io
 
 VOLUME /out
 WORKDIR /build
-COPY ./scripts/entrypoint.sh /build
-RUN chmod +x /build/entrypoint.sh
+ADD ./scripts/entrypoint.sh /build
+ADD ./scripts/update.sh /build
+RUN chmod +x /build/*.sh
+RUN cd /build
 
 ARG DISTRO
 ENV DISTRO=${DISTRO}
@@ -21,4 +23,4 @@ ENV HEKATE_ID=${HEKATE_ID}
 ARG CPUS=2
 ENV CPU=${CPUS}
 
-ENTRYPOINT /build/entrypoint.sh
+CMD /build/entrypoint.sh
