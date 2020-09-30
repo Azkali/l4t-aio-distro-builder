@@ -1,7 +1,11 @@
 # L4T AIO Builder
 
-What is it ? 
-It's anm 
+L4T AIO build automates the construction of GNU/Linux (L4T) distributions made and maintained by Linux4Switch and Switchroot members.
+
+## Pre requisite
+
+- Docker installed on your machine
+- ~40GB of storage space avalaible
 
 ## Options :
 
