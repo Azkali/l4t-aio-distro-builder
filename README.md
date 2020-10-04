@@ -17,12 +17,13 @@ Variables:
     DEVICE=tegra210   Device as set in the configs directory.
     DISTRO=arch       Target distribution using file found in DEVICE folder.
     HEKATE_ID=SWR-ARC Set a Hekate ID.
+    PARTNUM=mmcblk0p2 Set the partition that will be booted (it should reflect what you can find in`/dev`)
 ```
 
 ## The classic Docker way
 
 ```sh
-DISTRO=arch DEVICE=tegra210 PARTNUM=2 HEKATE_ID=SWR-ARC CPUS=4 ./run.sh /absolute/path/to/build/dir
+DISTRO=arch DEVICE=tegra210 PARTNUM=mmcblk0p2 HEKATE_ID=SWR-ARC CPUS=4 ./run.sh /absolute/path/to/build/dir
 ```
 
 ## The Docker In Docker way
@@ -49,7 +50,7 @@ docker run --privileged -it --rm -v /var/run/docker.sock:/var/run/docker.sock al
 
 Run the container:
 ```sh
-docker run --privileged -it --rm -e DISTRO=arch -e DEVICE=tegra210 -e PARTNUM=2 -e HEKATE_ID=SWR-ARC -e CPUS=4 -v "${swr_vol}":/out -v /var/run/docker.sock:/var/run/docker.sock alizkan/l4t-aio-distro-builder:latest
+docker run --privileged -it --rm -e DISTRO=arch -e DEVICE=tegra210 -e PARTNUM=mmcblk0p2 -e HEKATE_ID=SWR-ARC -e CPUS=4 -v "${swr_vol}":/out -v /var/run/docker.sock:/var/run/docker.sock alizkan/l4t-aio-distro-builder:latest
 ```
 
 Remove the volume when done:

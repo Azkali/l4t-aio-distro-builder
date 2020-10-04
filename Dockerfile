@@ -7,10 +7,11 @@ RUN apt-get update -y && apt-get install -y p7zip-full docker.io
 
 VOLUME /out
 WORKDIR /build
+
 ADD ./scripts/entrypoint.sh /build
 ADD ./scripts/update.sh /build
+
 RUN chmod +x /build/*.sh
-RUN cd /build
 
 ARG DISTRO
 ENV DISTRO=${DISTRO}
