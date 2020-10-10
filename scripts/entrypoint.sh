@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # If we're inside docker we get the volume name attached to the running container otherwise retrieve the output directory inputed
 if  [[ -f /.dockerenv ]]; then out=/out; volume=$(docker inspect -f '{{range .Mounts}}{{.Name}}{{end}}' "$(cat /etc/hostname)");
