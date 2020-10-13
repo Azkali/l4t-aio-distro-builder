@@ -3,7 +3,7 @@ set -e
 
 # If we're inside docker we get the volume name attached to the running container otherwise retrieve the output directory inputed
 if  [[ -f /.dockerenv ]]; then out=/out; volume=$(docker inspect -f '{{range .Mounts}}{{.Name}}{{end}}' "$(cat /etc/hostname)");
-	else out="$(realpath "${@:$#}")"; [[ ! -d ${out} ]] && echo "Invalid output path: ${out}" && exit 1; fi
+	else out="$(realpath "${@:$#}")"; volume="${out}"; [[ ! -d ${out} ]] && echo "Invalid output path: ${out}" && exit 1; fi
 
 # Check if the environement variables are set
 [[ -z "${DISTRO}" || -z "${PARTNUM}" || -z "${HEKATE_ID}" || -z "${DEVICE}" ]] && \
