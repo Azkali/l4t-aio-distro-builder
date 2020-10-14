@@ -23,7 +23,7 @@ Variables:
 ## The classic Docker way
 
 ```sh
-DISTRO=arch DEVICE=tegra210 PARTNUM=mmcblk0p2 HEKATE_ID=SWR-ARC CPUS=4 ./scripts/entrypoint.sh /absolute/path/to/build/dir
+sudo DISTRO=arch DEVICE=tegra210 PARTNUM=mmcblk0p2 HEKATE_ID=SWR-ARC CPUS=4 ./scripts/entrypoint.sh /absolute/path/to/build/dir
 ```
 
 ## The Docker In Docker way
