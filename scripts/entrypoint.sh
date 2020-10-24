@@ -19,6 +19,10 @@ if [[ $(command -v 7z) ]]; then zip_ver=7z;
 	else [[ -z "${zip_ver}" ]] && \
 	echo "7z is not installed on your machine..." && exit 1; fi
 
+set +e
+rm -rf "${out}/Image" "${out}/tegra210-icosa.dtb" "${out}/modules.tar.gz" "${out}/update.tar.gz" "${out}/switchroot/${DISTRO}" "${out}/bootloader/"
+set -e
+
 echo -e "\n\t\tBuilding boot.scr and initramfs and updating coreboot.rom\n"
 docker run -it --rm -e CPUS="${CPUS}" -e DISTRO="${DISTRO}" -e PARTNUM="${PARTNUM}" -v "${volume}":/out alizkan/l4t-bootfiles-misc:latest
 
